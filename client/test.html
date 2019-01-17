@@ -1,0 +1,48 @@
+<!--git@github.com:mqttjs/MQTT.js.git-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="node_modules/mqtt/browserMqtt.js"></script>
+</head>
+<body>
+
+<div style="float: left; width: 50%;">
+<pre id="log"></pre>
+</div>
+<div>
+	<input id="b1" name="b1"/><button onclick="cbutton('b1');">发送</button><br/>
+	<input id="b2" name="b2"/><button onclick="cbutton('b2');">发送</button>
+</div>
+
+<script>
+    function log(msg) {
+        document.getElementById('log').textContent += msg + '\n';
+    }
+    function cbutton(be){
+        client.publish('mqtt/demo',document.getElementById(be).value)
+    }
+
+</script>
+
+	<script>
+        var client = mqtt.connect('ws://localhost:9001',function () {
+			
+        }) // you add a ws:// url here
+        client.subscribe("mqtt/demo")
+
+        client.on("message", function (topic, payload) {
+            console.log([topic, payload].join(": "))
+            log([topic, payload].join(": "))
+            // client.end()
+        })
+
+		setInterval(function () {
+            client.publish("mqtt/demo", navigator.userAgent+new Date().getTime())
+        },1000)
+
+	</script>
+
+</body>
+</html>
