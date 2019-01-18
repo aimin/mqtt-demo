@@ -5,7 +5,7 @@ git@github.com:toke/docker-mosquitto.git
 git@github.com:mqttjs/MQTT.js.git
 
 ## 在浏览器中使用方法，用webpack打包：
-···
+```
 npm install -g browserify // install browserify
 cd node_modules/mqtt
 npm install . // install dev dependencies
@@ -14,4 +14,4 @@ npm install -g webpack // install webpack
 cd node_modules/mqtt
 npm install . // install dev dependencies
 webpack mqtt.js ./browserMqtt.js --output-library mqtt
-···
+```
